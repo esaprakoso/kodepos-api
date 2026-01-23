@@ -53,7 +53,7 @@ This is a simple API to get postal code information.
 
     *   **Example:**
         ```
-        /city?country=indonesia&province=jawa%20barat
+        /city?country=id&province=jawa%20barat
         ```
 
 *   **`GET /district`**
@@ -67,7 +67,7 @@ This is a simple API to get postal code information.
 
     *   **Example:**
         ```
-        /district?country=indonesia&province=jawa%20barat&city=bandung
+        /district?country=id&province=jawa%20barat&city=bandung
         ```
 
 *   **`GET /village`**
@@ -82,7 +82,7 @@ This is a simple API to get postal code information.
 
     *   **Example:**
         ```
-        /village?country=indonesia&province=jawa%20barat&city=bandung&district=coblong
+        /village?country=id&province=jawa%20barat&city=bandung&district=coblong
         ```
 
 *   **`GET /postal-code`**
@@ -98,5 +98,5 @@ This is a simple API to get postal code information.
 
     *   **Example:**
         ```
-        /postal-code?country=indonesia&province=jawa%20barat&city=bandung&district=coblong&village=dago
+        /postal-code?country=id&province=jawa%20barat&city=bandung&district=coblong&village=dago
         ```
