@@ -26,8 +26,7 @@ COPY --from=builder /node_modules ./node_modules
 COPY package*.json ./
 
 # buat folder data (SQLite)
-RUN mkdir -p /data \
-    && chown -R node:node /app
+RUN chown -R node:node /data
 
 USER node
 
