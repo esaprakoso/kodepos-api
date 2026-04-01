@@ -27,7 +27,6 @@ COPY --from=builder /app/package*.json ./
 RUN npm install --omit=dev
 
 # optional: non-root user
-RUN addgroup -S nodejs && adduser -S node -G nodejs
 USER node
 
 # expose port (optional, sesuaikan app)
