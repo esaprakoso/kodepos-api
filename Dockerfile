@@ -1,38 +1,37 @@
-# Stage 1: deps
-FROM node:20-alpine AS deps
-WORKDIR /
-
-COPY package*.json ./
-RUN npm ci
-
-# Stage 2: build (compile TS → JS)
+# ---------- STAGE 1: BUILD ----------
 FROM node:20-alpine AS builder
-WORKDIR /
 
-COPY --from=deps /node_modules ./node_modules
+WORKDIR /app
+
+# install deps (cache friendly)
+COPY package*.json ./
+RUN npm install
+
+# copy source
 COPY . .
 
+# build (hasilkan dist/)
 RUN npm run build
-# hasilnya: /dist
 
-# Stage 3: production runtime
+
+# ---------- STAGE 2: RUNNER ----------
 FROM node:20-alpine
 
-WORKDIR /
+WORKDIR /app
 
-# hanya ambil yang diperlukan
-COPY --from=builder /dist ./dist
-COPY --from=builder /node_modules ./node_modules
-COPY package*.json ./
+# hanya copy yang dibutuhkan
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
 
-# buat folder data (SQLite)
-RUN chown -R node:node /data
+# install production deps only
+RUN npm install --omit=dev
 
+# optional: non-root user
+RUN addgroup -S nodejs && adduser -S node -G nodejs
 USER node
 
-ENV NODE_ENV=production
-ENV DB_PATH=/data/database.sqlite
+# expose port (optional, sesuaikan app)
+EXPOSE 3001
 
-EXPOSE 3000
-
+# start app
 CMD ["node", "dist/index.js"]

@@ -1,17 +1,22 @@
 services:
   app:
     build: .
-    container_name: node-ts-sqlite
+    container_name: node-app
+    restart: unless-stopped
 
     ports:
       - "3001:3001"
 
     volumes:
-      # hanya data yang writable
-      - ./data:/app/data:rw
+      # hanya mount data (SQLite)
+      - ./data:/app/data
 
     environment:
       - NODE_ENV=production
-      - DB_PATH=/app/data/database.sqlite
 
-    restart: unless-stopped
+    # optional: healthcheck (recommended)
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000', res => process.exit(res.statusCode === 200 ? 0 : 1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
