@@ -21,8 +21,8 @@ FROM node:20-alpine
 WORKDIR /
 
 # hanya ambil yang diperlukan
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /dist ./dist
+COPY --from=builder /node_modules ./node_modules
 COPY package*.json ./
 
 # buat folder data (SQLite)
