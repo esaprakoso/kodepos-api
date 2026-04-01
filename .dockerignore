@@ -1,0 +1,61 @@
+# ========================
+# Node
+# ========================
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+
+# ========================
+# Build output
+# ========================
+dist
+build
+.tmp
+.cache
+
+# ========================
+# TypeScript
+# ========================
+*.tsbuildinfo
+
+# ========================
+# Environment / secrets
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Database (SQLite)
+# ========================
+data/*
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+
+# ========================
+# Logs
+# ========================
+logs
+*.log
+
+# ========================
+# OS / Editor
+# ========================
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# ========================
+# Git
+# ========================
+.git
+.gitignore
+
+# ========================
+# Docker (opsional)
+# ========================
+docker-compose.yml
